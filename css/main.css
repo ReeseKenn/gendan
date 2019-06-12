@@ -1,0 +1,30 @@
+.login,.title{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.title{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 36px;
+}
+.atitle{
+    width: 60px;
+}
+.tablewrapper,.pagewrapper{
+    width: 80%;
+    margin: auto;
+}
+.pagewrapper{
+    display: flex;
+    justify-content: center;
+}
+.formwrapper,.pwdwrapper{
+    width:50%;
+    margin: auto;
+}
+.pwdwrapper{
+    margin-top: 50px;
+    width: 40%;
+}
