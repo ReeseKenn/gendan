@@ -7,7 +7,7 @@ $database = "gendan";
  
 // 创建连接
 $conn = new mysqli($servername, $username, $password, $database);
- 
+mysqli_set_charset($conn,'UTF8');
 // 检测连接
 if ($conn->connect_error) {
     die("连接失败: " . $conn->connect_error);
@@ -18,14 +18,14 @@ session_start();
 $username = stripslashes(trim($_POST['username'])); 
 $password = $_POST['password']; 
 // echo $password;
-//   if ($username=="") { 
-//     echo '用户名不能为空'; 
-//     exit; 
-//   } 
-//   if ($password=="") { 
-//     echo '密码不能为空'; 
-//     exit; 
-//   } 
+  if ($password=="") { 
+    echo '用户名不能为空'; 
+    exit; 
+  } 
+  if ($password=="") { 
+    echo '密码不能为空'; 
+    exit; 
+  } 
 
 $_SESSION["username"]=$username;
 $sql1="select * from users where username='$username'";
@@ -37,6 +37,7 @@ if($result){
     if($res){
         $row = mysqli_fetch_assoc($res);
         $role= $row["role"];
+        $_SESSION["role"]=$role;
         echo $role;
     }else{
         echo "登录失败，请稍后再试";

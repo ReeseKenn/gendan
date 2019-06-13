@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+    $(function(){
+        $.ajaxSettings.async = true; 
+        $.get('getrole.php',function(data) { 
+                // alert(data);
+                if(data==="ywy"||data==="业务员"){
+                    // $("#mark").empty();
+                    $("#mark").append('<li><a href="../ywy/ywy.html">我的所有订单</a></li>').append('<li><a href="../ywy/addorder.html">发布新订单</a></li>');
+                }else if(data==="admin"){
+                    $("#mark").append('<li><a href="../admin/admin.html">账号管理</a></li>');
+                    $("#mark").append('<li><a href="../admin/adduser.html">添加账号</a></li>');
+                }
+
+
+                
+            }) 
+        
+        
+    });
+    </script>
+    <title>跟单系统-修改密码</title>
+
+</head>
+<body>
+    <!-- 导航条 start -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">跟单系统</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul id="mark" class="nav navbar-nav">
+                    <!-- <li><a href="admin.html">账号管理</a></li>
+                    <li><a href="adduser.html">添加账号</a></li> -->
+                </ul>
+                
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#">修改密码</a></li>
+                    <li><a href="logout.php">退出登录</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- 导航条 end -->
+
+    <div class="pwdwrapper">
+        <form class="form-horizontal">
+            
+            <div class="form-group">
+                <label for="pwd" class="col-sm-3 control-label">新密码</label>
+                <div class="col-sm-9">
+                <input type="password" class="form-control" id="pwd">
+                </div>
+            </div>
+            <div class="form-group">
+                    <label for="cpwd" class="col-sm-3 control-label">确认密码</label>
+                    <div class="col-sm-9">
+                    <input type="password" class="form-control" id="cpwd">
+                    </div>
+            </div>
+            
+            
+            <div class="form-group">
+                <div class="col-sm-offset-6 col-sm-6">
+                <button id="chpwd" type="submit" class="btn btn-default">提交</button>
+                </div>
+            </div>
+        </form>       
+    </div>
+
+
+
+
+    
+    <script type="text/javascript">
+        $("#chpwd").on('click',function(){ 
+            var pwd = $("#pwd").val(); 
+            var cpwd= $("#cpwd").val(); 
+            if(pwd===""){
+                alert("密码不能为空！")
+            }else if(pwd!==cpwd){
+                alert("两次密码不一致！")
+            }else{
+                $.ajaxSettings.async = false; 
+                $.post('dochpwd.php',{password:pwd},function(data) { 
+                    // console.log(data);
+                    // console.log(typeof(data));
+                    if(data==="1"){
+                        alert("修改成功！")
+                    }else if(data==="Not Logged In"){
+                        alert("修改失败！请登录")
+                        setTimeout(function(){
+                            window.location.href = 'index.html'
+                        },1);
+                    }else{
+                        alert("修改失败！")
+                    }
+
+                }) 
+            }      
+        });
+    </script>
+</body>
+</html>

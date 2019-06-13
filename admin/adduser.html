@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="../css/main.css">
     <title>跟单系统-添加账号</title>
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
@@ -27,8 +27,8 @@
                 </ul>
                 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="changepwd.html">修改密码</a></li>
-                    <li><a href="index.html">退出登录</a></li>
+                    <li><a href="../pub/changepwd.html">修改密码</a></li>
+                    <li><a href="../pub/logout.php">退出登录</a></li>
                 </ul>
             </div>
         </div>
@@ -56,9 +56,9 @@
                     </div>
             </div>
             <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">用户角色</label>
+                <label for="addrole" class="col-sm-2 control-label">用户角色</label>
                 <div class="col-sm-10">
-                    <select class="form-control">
+                    <select class="form-control"id="addrole">
                         <option>业务员</option>
                         <option>跟单员</option>
                         <option>物流</option>
@@ -66,9 +66,10 @@
                 </div>
             </div>
             <div class="form-group">
-                    <label for="inputPassword3" class="col-sm-2 control-label">用户部门</label>
+                    <label for="addDpt" class="col-sm-2 control-label">用户部门</label>
                     <div class="col-sm-10">
-                        <select class="form-control">
+                        <select class="form-control"id="addDpt">
+                            <option></option>
                             <option>订单中心</option>
                             <option>服装供应链</option>
                         </select>
@@ -77,11 +78,46 @@
             
             <div class="form-group">
                 <div class="col-sm-offset-6 col-sm-6">
-                <button type="submit" class="btn btn-default">提交</button>
+                <button id="addusr" type="submit" class="btn btn-default">提交</button>
                 </div>
             </div>
         </form>       
     </div>
 
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $("#addusr").on('click',function(){ 
+            var addun = $("#addun").val(); 
+            var addpwd= $("#addpwd").val(); 
+            var addcpwd= $("#addcpwd").val(); 
+            var addrole= $("#addrole").val(); 
+            var addDpt= $("#addDpt").val(); 
+            // console.log(addun)
+            // console.log(addpwd)
+            // console.log(addcpwd)
+            // console.log(addrole)
+            // console.log(addDpt)
+            // if(addrole==="业务员"){
+            //     addrole="ywy"
+            // }
+            // if(pwd===""){
+            //     alert("密码不能为空！")
+            // }else if(pwd!==cpwd){
+            //     alert("两次密码不一致！")
+            // }else{
+                $.ajaxSettings.async = false; 
+                $.post('addusr.php',{username:addun,password:addpwd,role:addrole,department:addDpt},function(data) { 
+                    console.log(data);
+                    console.log(typeof(data));
+                    if(data==="1"){
+                        alert("添加用户成功！")
+                    }else{
+                        alert("添加失败！")
+                    }
+
+                }) 
+            // }      
+        });
+    </script>
 </body>
 </html>

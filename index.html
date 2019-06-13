@@ -87,26 +87,26 @@
         //     return false; 
         // } 
         $.ajaxSettings.async = false; 
-        $.post('dologin.php',{username:uid,password:pwd},function(data) { 
+        $.post('pub/dologin.php',{username:uid,password:pwd},function(data) { 
                 // alert(data);
                 if(data==="admin"){
                     setTimeout(function(){
-                    window.location.href = 'admin.html'
+                    window.location.href = 'admin/admin.html'
                 },1);
                     alert("登录成功，即将跳转管理员页面！")
-                }else if(data==="ywy"){
+                }else if(data==="ywy"||data==="业务员"){
                     setTimeout(function(){
-                    window.location.href = 'ywy.php'
+                    window.location.href = 'ywy/ywy.html'
                 },1);
                     alert("登录成功，即将跳转业务员页面！")
-                }else if(data==="gdy"){
+                }else if(data==="gdy"||data==="跟单员"){
                     setTimeout(function(){
-                    window.location.href = 'gdy.php'
+                    window.location.href = 'gdy/gdy.html'
                 },1);
                     alert("登录成功，即将跳转跟单员页面！")
-                }else if(data==="wl"){
+                }else if(data==="wl"||data==="物流"){
                     setTimeout(function(){
-                    window.location.href = 'wl.php'
+                    window.location.href = 'wl/wl.php'
                 },1);
                     alert("登录成功，即将跳转物流管理页面！")
                 }else{
